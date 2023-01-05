@@ -18,7 +18,7 @@ let httpsOptions = {
   cert: fs.readFileSync('./cert/certi.crt'),
   key: fs.readFileSync('./cert/operadores.key'),
 }
-
+//Hola
 const secureServer = https.createServer(httpsOptions, app);
 */
 const nonSecureServer = http.createServer(app);
