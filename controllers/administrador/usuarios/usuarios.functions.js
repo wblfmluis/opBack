@@ -12,7 +12,7 @@ const addUser = async (inputData) => {
     await errorHandler.saveError("addUser", inputData, e);
     return {
       result: false,
-      code: 500,
+      code: "500",
       message: e,
     };
   }
@@ -34,7 +34,7 @@ const updateUser = async (inputData, iduser) => {
     await errorHandler.saveError("updateUser", inputData, e);
     return {
       result: false,
-      code: 500,
+      code: "500",
       message: e,
     };
   }
@@ -50,7 +50,7 @@ const deactivateUser = async (inputData) => {
     await errorHandler.saveError("deactivateUser", inputData, e);
     return {
       result: false,
-      code: 500,
+      code: "500",
       message: e,
     };
   }
@@ -63,7 +63,7 @@ const destroyUser = async (inputData) => {
     await errorHandler.saveError("destroyUser", inputData, e);
     return {
       result: false,
-      code: 500,
+      code: "500",
       message: e,
     };
   }
@@ -78,7 +78,7 @@ const getUsers = async () => {
     await errorHandler.saveError("getUsers", "", e);
     return {
       result: false,
-      code: 500,
+      code: "500",
       message: e,
     };
   }
@@ -91,7 +91,7 @@ const getUserDetail = async (inputData) => {
     await errorHandler.saveError("getUserDetail", inputData, e);
     return {
       result: false,
-      code: 500,
+      code: "500",
       message: e,
     };
   }

@@ -21,7 +21,7 @@ exports.deactivateView = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send("200", JSON.stringify(result));
 };
 
 exports.getViews = async (req, res) => {
@@ -69,5 +69,5 @@ exports.deactivateFunction = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send("200", JSON.stringify(result));
 };

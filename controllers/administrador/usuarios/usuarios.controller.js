@@ -5,7 +5,7 @@ exports.addUser = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send(result);
 };
 
 exports.updateUser = async (req, res) => {
@@ -13,7 +13,7 @@ exports.updateUser = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send("200", JSON.stringify(result));
 };
 
 exports.deactivateUser = async (req, res) => {
@@ -21,15 +21,15 @@ exports.deactivateUser = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send("200", JSON.stringify(result));
 };
 
 exports.destroyUser = async (req, res) => {
   let result = await userFunctions.destroyUser(req.params.id);
   if (result.result === false) {
-    return res.status(result.code).send(result.message);
+    return res.send(result.code, result.message);
   }
-  return res.status(200).send(result);
+  return res.send("200", JSON.stringify(result));
 };
 
 exports.getUsers = async (req, res) => {
@@ -37,7 +37,7 @@ exports.getUsers = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send(result);
 };
 
 exports.getUserDetail = async (req, res) => {
@@ -45,5 +45,5 @@ exports.getUserDetail = async (req, res) => {
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
-  return res.status(200).send(result);
+  return res.send(result);
 };
