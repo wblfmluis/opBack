@@ -2,6 +2,7 @@ const registroController = require("../../controllers/empresa/registro/registro.
 const router = require("express").Router();
 
 router.route("/addEmpresa").post(registroController.addEmpresa);
+router.route("/public/addEmpresa").post(registroController.addEmpresa);
 router.route("/updateEmpresa/:id").put(registroController.updateEmpresa);
 router
   .route("/deactivateEmpresa/:id")

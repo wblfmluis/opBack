@@ -3,7 +3,7 @@ const registroFunctions = require("./registro.functions");
 exports.addEmpresa = async (req, res) => {
   let result = await registroFunctions.addEmpresa(req.body);
   if (result.result === false) {
-    return res.status(result.code).send(result.message);
+    return res.status(result.code).send(result);
   }
   return res.send(result);
 };
@@ -26,6 +26,9 @@ exports.deactivateEmpresa = async (req, res) => {
 
 exports.getEmpresas = async (req, res) => {
   let result = await registroFunctions.getEmpresas();
+  if (result === null) {
+    return res.status(200).send([]);
+  }
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
@@ -34,6 +37,9 @@ exports.getEmpresas = async (req, res) => {
 
 exports.getEmpresaDetail = async (req, res) => {
   let result = await registroFunctions.getEmpresaDetail(req.params.id);
+  if (result === null) {
+    return res.status(200).send([]);
+  }
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
