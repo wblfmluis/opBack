@@ -6,6 +6,7 @@ const filterAdminRoutes = require("./administrador/filtrado/filtrado.routes");
 const catalogosRoutes = require("./catalogosGenerales/catalogos.routes");
 const adminUserRoutes = require("./administrador/usuarios/usuarios.routes");
 const permisosRoutes = require("./permisos/permisos.routes");
+const empresaRoutes = require("./empresa/empresa.routes");
 /* Route Files */
 
 const express = require("express");
@@ -22,5 +23,6 @@ router.use(`${urlApi.api_url_base}/admin/actions`, filterAdminRoutes);
 router.use(`${urlApi.api_url_base}/generales`, catalogosRoutes);
 router.use(`${urlApi.api_url_base}/admin/users`, adminUserRoutes);
 router.use(`${urlApi.api_url_base}/admin/permisos`, permisosRoutes);
+router.use(`${urlApi.api_url_base}/empresa`, empresaRoutes);
 
 module.exports = router;

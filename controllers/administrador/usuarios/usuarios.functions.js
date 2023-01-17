@@ -5,6 +5,16 @@ const bcrypt = require("bcrypt");
 
 const addUser = async (inputData) => {
   try {
+    const usuario = await opDb.models.admUsuarios.findOne({
+      where: { user: inputData.user },
+    });
+    if (usuario !== null) {
+      return {
+        result: false,
+        code: "400",
+        message: "Ya existe una cuenta con email indicado",
+      };
+    }
     let password = inputData.password;
     inputData.password = bcrypt.hashSync(password, 8);
     return await opDb.models.admUsuarios.create(inputData);
