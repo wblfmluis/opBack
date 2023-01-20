@@ -9,7 +9,7 @@ exports.addEmpresa = async (req, res) => {
 };
 
 exports.updateEmpresa = async (req, res) => {
-  let result = await registroFunctions.addEmpresa(req.body, req.params.id);
+  let result = await registroFunctions.updateEmpresa(req.body, req.params.id);
   if (result.result === false) {
     return res.status(result.code).send(result.message);
   }
