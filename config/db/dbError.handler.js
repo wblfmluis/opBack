@@ -5,7 +5,7 @@ const saveError = async (fun, input, err) => {
   try {
     await opDb.models.systemErrors.create({
       function: fun,
-      inputData: input.toString(),
+      inputData: JSON.stringify(input),
       errorMessage: err.toString(),
     });
   } catch (e) {
