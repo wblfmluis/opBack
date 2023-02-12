@@ -121,13 +121,45 @@ const getOperadoresEstadistica = async (parametros) => {
 const getOperadorDetalle = async (idOperador) => {
   try {
     return opDb.models.operador.findOne({
+      attributes: ["nombreOperador", "aptoMedico", "celularOperador", "emailOperador", "fechaRegistro", "observaciones", "expAptoMedico"],
       where: { id: idOperador },
       include: [
         {
+          attributes: ["nombreEdad"],
           model: opDb.models.edadOperador,
-          as: "idedadOperador_edadOperador",
+          as: "edadOperador",
           required: false,
         },
+        {
+          attributes: ["nombreEstado"],
+          model: opDb.models.estado,
+          as: "estadoOperador",
+          required: false
+        },
+        {
+          attributes: ["nombreExperienciaOperador"],
+          model: opDb.models.experienciaOperador,
+          as: "experienciaOperador",
+          required: false
+        },
+        {
+          attributes: ["formaPago"],
+          model: opDb.models.formaPago,
+          as: "formaPagoOperador",
+          required: false
+        },
+        {
+          attributes: ["nombreTipoServicio"],
+          model: opDb.models.tipoServicio,
+          as: "tipoServicioOperador",
+          required: false
+        },
+        {
+          attributes: ["nombreTipoUnidad"],
+          model: opDb.models.tipoUnidad,
+          as: "tipoUnidadOperador",
+          required: false,
+        }
       ],
     });
   } catch (e) {
