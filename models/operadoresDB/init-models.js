@@ -27,7 +27,6 @@ const _numeroEmpresasOperador = require("./tables/numeroEmpresasOperador");
 const _operador = require("./tables/operador");
 const _operadorEmpresaQuery = require("./tables/operadorEmpresaQuery");
 const _pagosEmpresa = require("./tables/pagos_empresa");
-const _permisoUsuario = require("./tables/permiso_usuario");
 const _plan = require("./tables/plan");
 const _planEmpresa = require("./tables/plan_empresa");
 const _preguntasCuestionario = require("./tables/preguntasCuestionario");
@@ -49,6 +48,7 @@ const _vista = require("./tables/vista");
 const _systemErrors = require("./tables/systemErrors");
 const _vistas = require("./tables/vistas");
 const _funciones = require("./tables/funciones");
+const _permisoUsuario = require("./tables/permisoUsuario");
 
 function initModels(sequelize) {
     const admUsuarios = _admUsuarios(sequelize, DataTypes);
@@ -105,6 +105,7 @@ function initModels(sequelize) {
     const vistas = _vistas(sequelize);
     const funciones = _funciones(sequelize);
 
+
     filtradoEdadOperador.belongsTo(edadOperador, {
         as: "idedadOperador_edadOperador",
         foreignKey: "idedadOperador",
@@ -122,8 +123,8 @@ function initModels(sequelize) {
         foreignKey: "idestado"
     });
     operador.belongsTo(ciudad, {
-       as: "ciudadOperador",
-       foreignKey: "idciudad"
+        as: "ciudadOperador",
+        foreignKey: "idciudad"
     });
     edadOperador.hasMany(operador, {
         as: "operadors",
@@ -141,9 +142,18 @@ function initModels(sequelize) {
         as: "idempresa_empresa",
         foreignKey: "idempresa",
     });
+    permisoUsuario.belongsTo(admUsuarios, {
+        as: "permisoUsuario",
+        foreignKey: "idusuario"
+    });
+
     empresa.hasMany(adminOperador, {
         as: "adminOperadors",
         foreignKey: "idempresa",
+    });
+    funciones.hasMany(permisoUsuario, {
+        as: "funcionesPermisos",
+        foreignKey: "idfuncion"
     });
     filtradoEmpresa.belongsTo(empresa, {
         as: "idempresa_empresa",
@@ -288,9 +298,17 @@ function initModels(sequelize) {
         as: "idoperador_operador",
         foreignKey: "idoperador",
     });
+    permisoUsuario.belongsTo(funciones, {
+        as: "permisoFuncion",
+        foreignKey: "idfuncion"
+    });
     operador.hasMany(adminOperador, {
         as: "adminOperadors",
         foreignKey: "idoperador",
+    });
+    admUsuarios.hasMany(permisoUsuario, {
+        as: "usuarioPermisos",
+        foreignKey: "idusuario"
     });
     operadorEmpresaQuery.belongsTo(operador, {
         as: "idoperador_operador",

@@ -15,5 +15,7 @@ router
 router
   .route("/functionDetail/:id")
   .post(permisosAdminController.getFunctionDetail);
+router.route("/generarPermisos/:id").get(permisosAdminController.generarEstructuraPermisos);
+router.route("/setUnsetPermiso/:id").put(permisosAdminController.setUnsetPermiso);
 
 module.exports = router;

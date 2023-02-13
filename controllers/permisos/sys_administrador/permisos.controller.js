@@ -71,3 +71,19 @@ exports.deactivateFunction = async (req, res) => {
   }
   return res.send("200", JSON.stringify(result));
 };
+
+exports.generarEstructuraPermisos = async (req, res) => {
+  let result = await permissionFunctions.generarEstructuraPermisos(req.params.id);
+  if (result.result === false) {
+    return res.status(result.code).send(result.message);
+  }
+  return res.status(200).send(result);
+}
+
+exports.setUnsetPermiso = async (req, res) => {
+  let result = await permissionFunctions.setUnsetPermiso(req.params.id);
+  if (result.result === false) {
+    return res.status(result.code).send(result.message);
+  }
+  return res.status(200).send(result);
+}

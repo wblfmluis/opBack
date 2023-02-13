@@ -136,6 +136,54 @@ const getFunctionDetail = async (inputData) => {
   }
 };
 
+const generarEstructuraPermisos = async (idusuario) => {
+  try {
+    let getPermisos = await opDb.models.funciones.findAll();
+    if (getPermisos.length !== 0) {
+      await opDb.models.permisoUsuario.destroy({where: {idusuario: idusuario}});
+      for (let permiso of getPermisos) {
+        await opDb.models.permisoUsuario.create({
+          idusuario: idusuario,
+          idfuncion: permiso.id
+        })
+      }
+      return await opDb.models.permisoUsuario.findAll({where: {idusuario: idusuario}});
+    } else {
+      return {
+        result: false,
+        code: 500,
+        message: "No hay permisos disponibles para generar la estructura",
+      };
+    }
+  } catch (e) {
+    await errorHandler.saveError("generarEstructuraPermisos", idusuario, e);
+    return {
+      result: false,
+      code: 500,
+      message: e,
+    };
+  }
+}
+
+const setUnsetPermiso = async (idpermiso) => {
+  try {
+    let permisoActual = await opDb.models.permisoUsuario.findByPk(idpermiso);
+    if (permisoActual.status === 0) {
+      return await opDb.models.permisoUsuario.update({status: 1}, {where: {id: idpermiso}});
+    }
+    if (permisoActual.status === 1) {
+      return await opDb.models.permisoUsuario.update({status: 0}, {where: {id: idpermiso}});
+    }
+  } catch (e) {
+    await errorHandler.saveError("setUnsetPermiso", idpermiso, e);
+    return {
+      result: false,
+      code: 500,
+      message: e,
+    };
+  }
+}
+
 module.exports = {
   newView,
   editView,
@@ -146,4 +194,6 @@ module.exports = {
   getFunctionDetail,
   deactivateView,
   deactivateFunction,
+  generarEstructuraPermisos,
+  setUnsetPermiso
 };
