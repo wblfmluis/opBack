@@ -49,6 +49,7 @@ const _systemErrors = require("./tables/systemErrors");
 const _vistas = require("./tables/vistas");
 const _funciones = require("./tables/funciones");
 const _permisoUsuario = require("./tables/permisoUsuario");
+const _sesionValidacion = require("./tables/sesionValidacion");
 
 function initModels(sequelize) {
     const admUsuarios = _admUsuarios(sequelize, DataTypes);
@@ -104,6 +105,7 @@ function initModels(sequelize) {
     const systemErrors = _systemErrors(sequelize);
     const vistas = _vistas(sequelize);
     const funciones = _funciones(sequelize);
+    const sesionValidacion = _sesionValidacion(sequelize);
 
 
     filtradoEdadOperador.belongsTo(edadOperador, {
@@ -144,6 +146,11 @@ function initModels(sequelize) {
     });
     permisoUsuario.belongsTo(admUsuarios, {
         as: "permisoUsuario",
+        foreignKey: "idusuario"
+    });
+
+    sesionValidacion.belongsTo(admUsuarios, {
+        as: "sesionUsuario",
         foreignKey: "idusuario"
     });
 
@@ -310,6 +317,10 @@ function initModels(sequelize) {
         as: "usuarioPermisos",
         foreignKey: "idusuario"
     });
+    admUsuarios.hasMany(sesionValidacion, {
+        as: "usuariosSesiones",
+        foreignKey: "idusuario"
+    });
     operadorEmpresaQuery.belongsTo(operador, {
         as: "idoperador_operador",
         foreignKey: "idoperador",
@@ -473,6 +484,7 @@ function initModels(sequelize) {
         systemErrors,
         vistas,
         funciones,
+        sesionValidacion
     };
 }
 
