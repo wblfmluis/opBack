@@ -125,37 +125,43 @@ const getOperadorDetalle = async (idOperador) => {
       where: { id: idOperador },
       include: [
         {
-          attributes: ["nombreEdad"],
+          attributes: ["id","nombreEdad"],
           model: opDb.models.edadOperador,
           as: "edadOperador",
           required: false,
         },
         {
-          attributes: ["nombreEstado"],
+          attributes: ["id","nombreEstado"],
           model: opDb.models.estado,
           as: "estadoOperador",
           required: false
         },
         {
-          attributes: ["nombreExperienciaOperador"],
+          attributes: ["idciudad","nombreCiudad"],
+          model: opDb.models.ciudad,
+          as: "ciudadOperador",
+          required: false
+        },
+        {
+          attributes: ["id","nombreExperienciaOperador"],
           model: opDb.models.experienciaOperador,
           as: "experienciaOperador",
           required: false
         },
         {
-          attributes: ["formaPago"],
+          attributes: ["id","formaPago"],
           model: opDb.models.formaPago,
           as: "formaPagoOperador",
           required: false
         },
         {
-          attributes: ["nombreTipoServicio"],
+          attributes: ["id","nombreTipoServicio"],
           model: opDb.models.tipoServicio,
           as: "tipoServicioOperador",
           required: false
         },
         {
-          attributes: ["nombreTipoUnidad"],
+          attributes: ["id","nombreTipoUnidad"],
           model: opDb.models.tipoUnidad,
           as: "tipoUnidadOperador",
           required: false,

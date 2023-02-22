@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
     "ciudad",
     {
-      id: {
+      idciudad: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
