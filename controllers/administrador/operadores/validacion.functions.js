@@ -5,8 +5,27 @@ const commonFunctions = require("../common.functions");
 
 const iniciarValidacion = async (token) => {
   try {
-    let identity = commonFunctions.decodeToken(token);
+    let identity = await commonFunctions.decodeToken(token);
     if (identity) {
+      let starDay = new Date();
+      starDay.setHours(0, 0, 0, 0);
+      let endDay = new Date();
+      endDay.setHours(23, 59, 59, 999);
+      let validarSesion = await opDb.models.sesionValidacion.findOne({
+        where: {
+          fechaInicio: {
+            [Sequelize.Op.between]: [starDay, endDay],
+          },
+        },
+      });
+      if (validarSesion !== null) {
+        return {
+          result: false,
+          code: "409",
+          message: "Ya existe una sesión de validación en curso",
+        };
+      }
+      console.log(validarSesion);
       return await opDb.models.sesionValidacion.create({
         idusuario: identity.idUsuario,
         fechaInicio: Date.now(),

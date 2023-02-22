@@ -34,7 +34,7 @@ exports.inicialValidacion = async (req, res) => {
     req.header("access-token")
   );
   if (result.result === false) {
-    return res.status(result.code).send(result.message);
+    return res.status(result.code).send(result);
   }
   return res.send(result);
 };
