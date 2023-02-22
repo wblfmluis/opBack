@@ -121,51 +121,62 @@ const getOperadoresEstadistica = async (parametros) => {
 const getOperadorDetalle = async (idOperador) => {
   try {
     return opDb.models.operador.findOne({
-      attributes: ["nombreOperador", "aptoMedico", "celularOperador", "emailOperador", "fechaRegistro", "observaciones", "expAptoMedico"],
+      attributes: [
+        "nombreOperador",
+        "aptoMedico",
+        "celularOperador",
+        "emailOperador",
+        "curp",
+        "nss",
+        "fechaNacimiento",
+        "fechaRegistro",
+        "observaciones",
+        "expAptoMedico",
+      ],
       where: { id: idOperador },
       include: [
         {
-          attributes: ["id","nombreEdad"],
+          attributes: ["id", "nombreEdad"],
           model: opDb.models.edadOperador,
           as: "edadOperador",
           required: false,
         },
         {
-          attributes: ["id","nombreEstado"],
+          attributes: ["id", "nombreEstado"],
           model: opDb.models.estado,
           as: "estadoOperador",
-          required: false
+          required: false,
         },
         {
-          attributes: ["idciudad","nombreCiudad"],
+          attributes: ["idciudad", "nombreCiudad"],
           model: opDb.models.ciudad,
           as: "ciudadOperador",
-          required: false
+          required: false,
         },
         {
-          attributes: ["id","nombreExperienciaOperador"],
+          attributes: ["id", "nombreExperienciaOperador"],
           model: opDb.models.experienciaOperador,
           as: "experienciaOperador",
-          required: false
+          required: false,
         },
         {
-          attributes: ["id","formaPago"],
+          attributes: ["id", "formaPago"],
           model: opDb.models.formaPago,
           as: "formaPagoOperador",
-          required: false
+          required: false,
         },
         {
-          attributes: ["id","nombreTipoServicio"],
+          attributes: ["id", "nombreTipoServicio"],
           model: opDb.models.tipoServicio,
           as: "tipoServicioOperador",
-          required: false
+          required: false,
         },
         {
-          attributes: ["id","nombreTipoUnidad"],
+          attributes: ["id", "nombreTipoUnidad"],
           model: opDb.models.tipoUnidad,
           as: "tipoUnidadOperador",
           required: false,
-        }
+        },
       ],
     });
   } catch (e) {

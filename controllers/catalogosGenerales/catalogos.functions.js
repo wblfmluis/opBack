@@ -32,7 +32,48 @@ const getCiudades = async (estado) => {
   }
 };
 
+const getCatalogosOperadores = async (catalogo) => {
+  try {
+    let result;
+    switch (catalogo) {
+      case "edad":
+        result = await opDb.models.edadOperador.findAll({
+          where: { status: 1 },
+        });
+        break;
+      case "experiencia":
+        result = await opDb.models.experienciaOperador.findAll({
+          where: { status: 1 },
+        });
+        break;
+      case "pago":
+        result = await opDb.models.formaPago.findAll({
+          where: { status: 1 },
+        });
+        break;
+      case "serivicio":
+        result = await opDb.models.tipoServicio.findAll({
+          where: { status: 1 },
+        });
+        break;
+      case "unidad":
+        result = await opDb.models.tipoUnidad.findAll({
+          where: { status: 1 },
+        });
+        break;
+    }
+    return result;
+  } catch (e) {
+    await errorHandler.saveError("getCatalogosOperadores", catalogo, e);
+    return {
+      result: false,
+      code: 500,
+      message: e.toString(),
+    };
+  }
+};
 module.exports = {
   getEstados,
   getCiudades,
+  getCatalogosOperadores,
 };

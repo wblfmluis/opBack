@@ -23,3 +23,10 @@ exports.getAllCiudades = async (req, res) => {
     return res.status(200).send(result);
   }
 };
+exports.getCatalogos = async (req, res) => {
+  let result = await catalogosFunctions.getCatalogosOperadores(req.query.cat);
+  if (result.result === false) {
+    return res.status(result.code).send(result.message);
+  }
+  return res.status(200).send(result);
+};

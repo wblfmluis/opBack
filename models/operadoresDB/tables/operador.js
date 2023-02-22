@@ -83,6 +83,21 @@ module.exports = function (sequelize, DataTypes) {
                 type: Sequelize.STRING(10),
                 allowNull: false,
             },
+            curp: {
+                type: Sequelize.STRING(50),
+                allowNull: true,
+                defaultValue: null
+            },
+            nss: {
+                type: Sequelize.STRING(20),
+                allowNull: true,
+                defaultValue: null
+            },
+            fechaNacimiento: {
+                type: Sequelize.DATEONLY,
+                allowNull: true,
+                defaultValue: null
+            },
             emailOperador: {
                 type: Sequelize.STRING(50),
                 allowNull: true,
