@@ -16,6 +16,9 @@ const iniciarValidacion = async (token) => {
           fechaInicio: {
             [Sequelize.Op.between]: [starDay, endDay],
           },
+          fechaFin: {
+            [Sequelize.Op.is]: null,
+          },
         },
       });
       if (validarSesion !== null) {
