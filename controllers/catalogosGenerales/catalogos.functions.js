@@ -51,7 +51,7 @@ const getCatalogosOperadores = async (catalogo) => {
           where: { status: 1 },
         });
         break;
-      case "serivicio":
+      case "servicio":
         result = await opDb.models.tipoServicio.findAll({
           where: { status: 1 },
         });
