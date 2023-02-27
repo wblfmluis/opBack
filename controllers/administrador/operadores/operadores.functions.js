@@ -39,7 +39,7 @@ const getNotasOperador = async (idOperador) => {
 const buscadorOperador = async (parametro) => {
   try {
     return await opDb.models.operador.findAll({
-      attributes: ["nombreOperador", "fechaRegistro", "celularOperador"],
+      attributes: ["nombreOperador", "fechaRegistro", "celularOperador", "id"],
       where: {
         [Sequelize.Op.or]: [
           {
